@@ -1,15 +1,15 @@
-import * as bodyParser from 'body-parser';
-import * as express from 'express';
-import * as firebaseAdmin from 'firebase-admin';
-import * as functions from 'firebase-functions';
-import * as cors from 'cors';
-import routes from './routes';
-import constants from './constants/index';
+import * as bodyParser from "body-parser";
+import * as express from "express";
+import * as firebaseAdmin from "firebase-admin";
+// import * as functions from "firebase-functions";
+import * as cors from "cors";
+import routes from "./routes";
+import constants from "./constants/index";
 
 /* eslint-disable*/
-require('dotenv/config');
-require('./utills/connection');
-const certJSON = require('../serviceAccountKey.json');
+require("dotenv/config");
+require("./utills/connection");
+const certJSON = require("../serviceAccountKey.json");
 
 /* eslint-enable */
 firebaseAdmin.initializeApp({
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ origin: true }));
 // api doc directory
-app.use('/', express.static('api-doc'));
+app.use("/", express.static("api-doc"));
 
 // Routes
 app.use(ADMIN, routes.Admin);
@@ -48,5 +48,4 @@ app.use(UPDATE, routes.UpdateProfile);
 app.use(CARD, routes.card);
 app.use(RESOURCES, routes.Resources);
 
-exports.app = functions.https.onRequest(app);
 export default app;

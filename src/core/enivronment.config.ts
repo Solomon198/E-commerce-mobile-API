@@ -28,7 +28,7 @@ const developement = {
   GEOCODING_APIKEY, // you can get this by from google cloud
   PAYSTACK_SECRET: PAYSTACK_SECRET_TEST, // signup to paystack !!
   PORT: 8070,
-  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@services.onb2v.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@jobworld.bb7uz.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   JWT_ISSUER: "https://example.com/example",
   JWT_AUDIENCE: "76rghjklkjh",
   JWT_ALGO: "RS256",
@@ -47,7 +47,7 @@ const production = {
   GEOCODING_APIKEY,
   PAYSTACK_SECRET: PAYSTACK_SECRET_LIVE,
   PORT: 8070,
-  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@services.onb2v.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@jobworld.bb7uz.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   JWT_ISSUER: JWT_AUDIENCE,
   JWT_AUDIENCE: JWT_ISSUER,
   JWT_ALGO: "RS256",

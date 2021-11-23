@@ -1,6 +1,6 @@
 import { Response, Request } from "express";
 import * as moment from "moment";
-import * as Twilio from "twilio";
+// import * as Twilio from "twilio";
 import {
   InvalidInputs,
   ProcessingError,
@@ -23,10 +23,10 @@ import { NumverifyResponseType } from "../Types/numverifyResponse";
 import Constants from "../constants/index";
 import User from "../Types/user";
 import Driver from "../Types/driver";
-import globalConfigs from "../core/enivronment.config";
+// import globalConfigs from "../core/enivronment.config";
 
-const configs = globalConfigs();
-const client = Twilio(configs.TWILIO_ACCOUNT_SID, configs.TWILIO_AUTH_TOKEN);
+// const configs = globalConfigs();
+// const client = Twilio(configs.TWILIO_ACCOUNT_SID, configs.TWILIO_AUTH_TOKEN);
 require("dotenv/config");
 
 export async function SinchCall(req: Request, res: Response) {

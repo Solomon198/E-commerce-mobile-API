@@ -5,7 +5,7 @@
     "build": "yarn compile:tsc && yarn doc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "start": "node lib/server.js",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "lint:fix": "eslint --fix src/**/*.ts",

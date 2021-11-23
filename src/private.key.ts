@@ -1,0 +1,11 @@
+const key = `-----BEGIN RSA PRIVATE KEY-----
+MIIBOgIBAAJAfp8z5XeTf/4E03ScpgTYAyrJbSyxKs4KkZv6HM24am7Wik7rhzlu
+Zo2cdpsX3utmLevdpP31QkwfkiXYui9s1wIDAQABAkAOXmiYOJqPYrcPe+Mu38vX
+iCp1biXospr2bRnT3PB5e1MCuZObLxHU0Lo5YtnoBt9magzKzXw0AJL8WwjcXfeJ
+AiEA1PScySjrmyLMW8krw93QImKZQYJ+OACmMSzNrIfWwoUCIQCYN0E3lLPjK/vx
+Desiv/ydNsYxiI1WAbLoryVBHJjmqwIhAId5RfTCz3/V12PcyrbD+ZCmYRDHzzwZ
+TaCi/ATyNbFxAiAEZiRmXM/OEulXEBXpjS7ZxEl6CP48rBPlkZo8BX2NvQIhAJkG
+2a9qvg6z/eaua8wwYxQvRsNT85sIYNP9j8W6geeg
+-----END RSA PRIVATE KEY-----`;
+
+export default key;

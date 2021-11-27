@@ -58,6 +58,7 @@ export async function fetchFeeds(req: Request, res: Response) {
     const posts = await models.Post.paginate(query, {
       limit: pageSize || 10,
       page: pageNumber,
+      populate: "userId category",
     });
     return ProcessingSuccess(res, {
       posts: posts.docs,

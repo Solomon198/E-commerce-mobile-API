@@ -21,11 +21,9 @@ const {
   VERIFICATION_BASE,
   TOKEN_MANAGEMENT_BASE,
   RESSET_PASSWORD_BASE,
-  PARCEL,
+  POSTS,
   UPDATE,
-  CARD,
-  ADMIN,
-  RESOURCES,
+  CATEGORIES,
 } = constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -37,15 +35,13 @@ app.use(cors({ origin: true }));
 app.use("/", express.static("api-doc"));
 
 // Routes
-app.use(ADMIN, routes.Admin);
 app.use(LOGIN_BASE, routes.login);
 app.use(SIGNUP_BASE, routes.SignUp);
 app.use(VERIFICATION_BASE, routes.Verification);
 app.use(TOKEN_MANAGEMENT_BASE, routes.Token);
 app.use(RESSET_PASSWORD_BASE, routes.PasswordReset);
-app.use(PARCEL, routes.Parcel);
+app.use(POSTS, routes.Posts);
 app.use(UPDATE, routes.UpdateProfile);
-app.use(CARD, routes.card);
-app.use(RESOURCES, routes.Resources);
+app.use(CATEGORIES, routes.Categories);
 
 export default app;

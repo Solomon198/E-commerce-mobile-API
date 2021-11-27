@@ -10,10 +10,7 @@ import User from "../Types/user";
 
 require("dotenv/config");
 
-export default async function RessetPassword(
-  req: Request,
-  res: Response,
-) {
+export default async function RessetPassword(req: Request, res: Response) {
   try {
     const { password, accessToken } = req.body as {
       password: string;
@@ -37,10 +34,6 @@ export default async function RessetPassword(
     });
 
     if (user) getDoc = user;
-
-    const driver = await models.Drivers.findOne({ userId });
-
-    if (driver) getDoc = driver;
 
     if (!getDoc) return UnAuthorized(res);
 

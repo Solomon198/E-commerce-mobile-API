@@ -1,36 +1,20 @@
 import * as joi from "joi";
 import { Request, Response, NextFunction } from "express";
-import {
-  InvalidInputs,
-  ProcessingError,
-} from "../RequestStatus/status";
+import { InvalidInputs, ProcessingError } from "../RequestStatus/status";
 
 const requestBodySchema = joi.object({
-  userAuthorization: joi.string().allow("").optional(),
-  transactionType: joi.number().required().max(1),
-  parcelOwner: joi.string().required(),
-  parcelPicker: joi.string().required(),
-  parcelPrice: joi.number().required(),
-  parcelOwnerPhoneNumber: joi.number().required(),
-  distance: joi.number().required(),
-  parcelLocationPhysicalAddress: joi.string().required(),
-  parcelDestinationPhysicalAddress: joi.string().required(),
-  parcelLocation: joi
-    .array()
-    .items(joi.number().required())
-    .length(2)
-    .required(),
-  parcelDestination: joi
-    .array()
-    .items(joi.number().required())
-    .length(2)
-    .required(),
+  coverImage: joi.string().required().label("Cover Image"),
+  title: joi.string().required().label("Title"),
+  description: joi.string().required().label("description"),
+  price: joi.string().required(),
+  category: joi.string().required(),
+  userId: joi.string().required(),
 });
 
-export default function ValidateParcelMiddleware(
+export default function ValidatePostMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   try {
     const { error } = requestBodySchema.validate(req.body);

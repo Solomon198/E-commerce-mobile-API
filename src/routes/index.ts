@@ -3,11 +3,9 @@ import SignUp from "./signUp";
 import Verification from "./verification";
 import Token from "./token";
 import PasswordReset from "./resetPassword";
-import Parcel from "./parcel";
+import Posts from "./posts";
 import UpdateProfile from "./update.profile";
-import card from "./cards";
-import Admin from "./admin";
-import Resources from "./resources";
+import Categories from "./categories";
 
 export default {
   login,
@@ -15,9 +13,7 @@ export default {
   Verification,
   Token,
   PasswordReset,
-  Parcel,
+  Posts,
   UpdateProfile,
-  card,
-  Admin,
-  Resources,
+  Categories,
 };

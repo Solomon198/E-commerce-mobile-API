@@ -12,7 +12,7 @@ import Constant from "../constants/index";
 export default async function HandleDuplicateSignUpMiddleWare(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   try {
     const { phoneNumber, countryCode } = req.body as {
@@ -25,10 +25,7 @@ export default async function HandleDuplicateSignUpMiddleWare(
     try {
       intlFormat = await getPhoneNumberInfo(phoneNumber, countryCode);
     } catch (e) {
-      return InvalidInputs(
-        res,
-        Constant.RequestResponse.InvalidPhoneNumber,
-      );
+      return InvalidInputs(res, Constant.RequestResponse.InvalidPhoneNumber);
     }
 
     res.locals.phoneNumber = intlFormat;
@@ -37,26 +34,13 @@ export default async function HandleDuplicateSignUpMiddleWare(
       phoneNumber: intlFormat,
     });
 
-    const getDriver = await models.Drivers.findOne({
-      phoneNumber: intlFormat,
-    });
-
-    if (getUser || getDriver) {
+    if (getUser) {
       if (getUser) {
         if (getUser.isVerified) {
           return UserExist(res);
         }
 
         await models.Users.deleteMany({
-          phoneNumber: intlFormat,
-        });
-      }
-
-      if (getDriver) {
-        if (getDriver.isVerified) {
-          return UserExist(res);
-        }
-        await models.Drivers.deleteMany({
           phoneNumber: intlFormat,
         });
       }

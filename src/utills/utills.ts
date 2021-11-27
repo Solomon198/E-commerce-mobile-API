@@ -27,12 +27,12 @@ type requestConfigs = {
 
 export async function sendPaystackRequest(
   configs: requestConfigs,
-  headers?: any,
+  headers?: any
 ) {
   return axios({
     ...configs,
     headers: {
-      Authorization: `Bearer ${PAYSTACK_SECRET}`,
+      "Authorization": `Bearer ${PAYSTACK_SECRET}`,
       "Content-Type": "application/json",
       ...headers,
     },
@@ -42,7 +42,7 @@ export async function sendPaystackRequest(
 export async function chargeUserAuthorization(
   email: string,
   chargeAmount: number,
-  authorization: string,
+  authorization: string
 ) {
   const amount = chargeAmount * 100;
   const chargeUser = await sendPaystackRequest({
@@ -65,7 +65,7 @@ export async function chargeUserAuthorization(
 export function sendNotification(
   title: string,
   body: string,
-  tokens: string[],
+  tokens: string[]
 ) {
   return firebaseAdmin.messaging().sendMulticast({
     notification: {
@@ -83,10 +83,7 @@ export function sendNotification(
   });
 }
 
-export function encodeToJwtToken(
-  data: any,
-  expire?: number | string,
-) {
+export function encodeToJwtToken(data: any, expire?: number | string) {
   const signOptions: jwt.SignOptions = {
     algorithm: JWT_ALGO as jwt.Algorithm,
   };
@@ -125,7 +122,7 @@ export function getTokens(userCreds: userType) {
       {
         userId: userCreds,
       },
-      constants.TokenExpiry.ACCESS_TOKENS,
+      constants.TokenExpiry.ACCESS_TOKENS
     );
     const refreshToken = encodeToJwtToken(userCreds);
 
@@ -143,10 +140,7 @@ export function GeneratePin() {
     .join(",");
 }
 
-export async function getPhoneNumberInfo(
-  phone: string,
-  countryCode: string,
-) {
+export async function getPhoneNumberInfo(phone: string, countryCode: string) {
   try {
     // Get an instance of `PhoneNumberUtil`.
     const phoneUtil = PhoneNumberUtil.getInstance();
@@ -169,7 +163,7 @@ export async function phoneNumberExist(phoneNumber: string) {
       phoneNumber,
     });
 
-    const driver = await models.Drivers.find({ phoneNumber });
+    const driver = await models.Users.find({ phoneNumber });
 
     if (doc || driver) {
       return true;

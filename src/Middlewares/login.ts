@@ -5,7 +5,6 @@ import {
   UnVerifiedAccount,
   InvalidCredential,
   InvalidInputs,
-  AccountNotActivated,
 } from "../RequestStatus/status";
 import models from "../models/index";
 import Constants from "../constants/index";
@@ -13,7 +12,7 @@ import Constants from "../constants/index";
 export default async function HandleUnverifiedAccount(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   try {
     const { phoneNumber, countryCode } = req.body as {
@@ -26,10 +25,7 @@ export default async function HandleUnverifiedAccount(
     try {
       intlFormat = await getPhoneNumberInfo(phoneNumber, countryCode);
     } catch (e) {
-      return InvalidInputs(
-        res,
-        Constants.RequestResponse.InvalidPhoneNumber,
-      );
+      return InvalidInputs(res, Constants.RequestResponse.InvalidPhoneNumber);
     }
 
     res.locals.phoneNumber = intlFormat;
@@ -38,27 +34,12 @@ export default async function HandleUnverifiedAccount(
       phoneNumber: intlFormat,
     });
 
-    const driver = await models.Drivers.findOne({
-      phoneNumber: intlFormat,
-    });
-
-    if (getUser || driver) {
+    if (getUser) {
       if (getUser) {
         if (!getUser.isVerified) {
           return UnVerifiedAccount(res);
         }
       }
-
-      if (driver) {
-        if (!driver.isVerified) {
-          return UnVerifiedAccount(res);
-        }
-
-        if (!driver.isActivated) {
-          return AccountNotActivated(res);
-        }
-      }
-
       next();
     } else {
       return InvalidCredential(res);

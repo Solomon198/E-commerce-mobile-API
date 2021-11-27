@@ -1,22 +1,18 @@
 import * as joi from "joi";
 import { Request, Response, NextFunction } from "express";
-import {
-  InvalidInputs,
-  ProcessingError,
-} from "../RequestStatus/status";
+import { InvalidInputs, ProcessingError } from "../RequestStatus/status";
 
 const requestBodySchema = joi.object({
-  amountPerKm: joi.number().required(),
-  radiusOfMatch: joi.number().required(),
+  userId: joi.string().required(),
 });
 
-export default function ValidateSetVariables(
+export default function GetParcelsValidation(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   try {
-    const { error } = requestBodySchema.validate(req.body);
+    const { error } = requestBodySchema.validate(req.query);
     if (error) {
       return InvalidInputs(res, error.message);
     }

@@ -19,10 +19,8 @@ import {
   getTokens,
 } from "../utills/utills";
 import models from "../models/index";
-import { NumverifyResponseType } from "../Types/numverifyResponse";
 import Constants from "../constants/index";
 import User from "../Types/user";
-import Driver from "../Types/driver";
 // import globalConfigs from "../core/enivronment.config";
 
 // const configs = globalConfigs();
@@ -208,10 +206,10 @@ export async function verifyCode(req: Request, res: Response) {
     const { pin, token } = req.body as { pin: string; token: string };
     if (!pin || !token) return InvalidInputs(res);
 
-    let decode: NumverifyResponseType;
+    let decode: any;
 
     try {
-      decode = decodeJwtToken(token) as NumverifyResponseType;
+      decode = decodeJwtToken(token) as any;
     } catch (e) {
       return UnAuthorized(res, Constants.ResponseMessages.TOKEN_EXPIRE);
     }
@@ -247,12 +245,6 @@ export async function verifyCode(req: Request, res: Response) {
         { useFindAndModify: false }
       );
 
-      const driver = await models.Drivers.findOneAndUpdate(
-        { phoneNumber: intlFormat },
-        { $set: { isVerified: true } },
-        { useFindAndModify: false }
-      );
-
       if (user) {
         const objectifyBSON = user.toObject() as User;
         const tokens = getTokens(objectifyBSON.userId as any);
@@ -265,18 +257,7 @@ export async function verifyCode(req: Request, res: Response) {
           user,
         });
       }
-      if (driver) {
-        const objectifyBSON = driver.toJSON() as Driver;
-        const tokens = getTokens(objectifyBSON.userId as any);
-        const { accessToken } = tokens;
-        const { refreshToken } = tokens;
 
-        return ProcessingSuccess(res, {
-          accessToken,
-          refreshToken,
-          user: driver,
-        });
-      }
       return UnAuthorized(res, Constants.ResponseMessages.INVALID_CREDENTIALS);
     }
 

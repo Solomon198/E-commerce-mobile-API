@@ -43,15 +43,6 @@ export default async function SignUp(req: Request, res: Response) {
 
     user.setPassword(password);
 
-    const createDebtDocument = new models.DebtManager({
-      driver: _id,
-      user: _id,
-      userId: _id,
-      amount: 0,
-      parcel: [],
-    });
-
-    await createDebtDocument.save();
     const $user = await user.save({ validateBeforeSave: false });
 
     const responseObj: any = $user.toObject();

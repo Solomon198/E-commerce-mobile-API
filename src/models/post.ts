@@ -10,6 +10,7 @@ const Posts: Schema = new Schema({
   category: { type: Schema.Types.ObjectId, ref: "category" },
   postId: Schema.Types.ObjectId,
   userId: { type: Schema.Types.ObjectId, ref: "Users" },
+  date: { type: Schema.Types.Date },
 });
 
 Posts.plugin(mongoosePagination);

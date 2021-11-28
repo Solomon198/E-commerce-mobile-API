@@ -20,6 +20,7 @@ export async function CreatePost(req: Request, res: Response) {
       price: parseFloat(price as any), // eslint-disable-line
       userId,
       postId,
+      date: new Date(),
     });
     newPost._id = postId; // eslint-disable-line;
 
@@ -59,6 +60,7 @@ export async function fetchFeeds(req: Request, res: Response) {
       limit: pageSize || 10,
       page: pageNumber,
       populate: "userId category",
+      sort: { date: -1 },
     });
     return ProcessingSuccess(res, {
       posts: posts.docs,

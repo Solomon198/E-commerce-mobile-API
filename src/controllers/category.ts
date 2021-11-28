@@ -11,6 +11,7 @@ export async function CreateCategory(req: Request, res: Response) {
     const newCategory = new models.Category({
       name,
       categoryId,
+      date: new Date(),
     });
     newCategory._id = categoryId;
     await newCategory.save({ validateBeforeSave: false });
@@ -26,7 +27,7 @@ export async function GetAllCategories(
   res: Response
 ) {
   try {
-    const categories = await models.Category.find({});
+    const categories = await models.Category.find({}).sort({ date: -1 });
     return ProcessingSuccess(res, categories);
   } catch (e) {
     return ProcessingError(res);

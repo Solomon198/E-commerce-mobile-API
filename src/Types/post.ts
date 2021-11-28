@@ -26,4 +26,5 @@ export interface PostProps extends Document {
   category: Types.ObjectId;
   postId: Types.ObjectId;
   userId: string;
+  date: any;
 }

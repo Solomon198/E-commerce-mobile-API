@@ -36,7 +36,7 @@ export async function CreatePost(req: Request, res: Response) {
 
 export async function fetchUserPosts(req: Request, res: Response) {
   try {
-    const { userId } = req.body as any;
+    const { userId } = req.query as any;
     const posts = await models.Post.find({ userId });
     return ProcessingSuccess(res, posts);
   } catch (e) {
@@ -46,7 +46,7 @@ export async function fetchUserPosts(req: Request, res: Response) {
 
 export async function fetchFeeds(req: Request, res: Response) {
   try {
-    const { budget, category, pageNumber, pageSize } = req.params as any;
+    const { budget, category, pageNumber, pageSize } = req.query as any;
     let query = {};
     if (budget) {
       query = { ...query, price: { $lte: parseInt(budget) } };

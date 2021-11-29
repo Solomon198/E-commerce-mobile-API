@@ -37,7 +37,7 @@ export async function CreatePost(req: Request, res: Response) {
 export async function fetchUserPosts(req: Request, res: Response) {
   try {
     const { userId } = req.query as any;
-    const posts = await models.Post.find({ userId });
+    const posts = await models.Post.find({ userId }).sort({ date: -1 });
     return ProcessingSuccess(res, posts);
   } catch (e) {
     return ProcessingError(res);

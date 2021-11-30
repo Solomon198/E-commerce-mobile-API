@@ -68,6 +68,7 @@ export async function fetchFeeds(req: Request, res: Response) {
       totalPages: posts.pages,
     });
   } catch (e) {
+    console.log(e);
     return ProcessingError(res);
   }
 }

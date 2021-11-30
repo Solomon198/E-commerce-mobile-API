@@ -57,8 +57,8 @@ export async function fetchFeeds(req: Request, res: Response) {
     }
 
     const posts = await models.Post.paginate(query, {
-      limit: pageSize || 10,
-      page: pageNumber,
+      limit: parseInt(pageSize + "") || 10, // eslint-disable-line
+      page: parseInt(pageNumber + ""), // eslint-disable-line
       populate: "userId category",
       sort: { date: -1 },
     });

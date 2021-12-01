@@ -11,6 +11,7 @@ export async function CreatePost(req: Request, res: Response) {
   try {
     const { userId, title, description, category, coverImage, price, postId } =
       req.body as PostProps;
+    console.log(postId);
     if (!postId) {
       const newPostId = new Types.ObjectId();
       const newPost = new models.Post({
@@ -31,8 +32,10 @@ export async function CreatePost(req: Request, res: Response) {
       );
       return ProcessingSuccess(res, post);
     }
-    const updatePost = await models.Post.updateOne(
-      { postId: Types.ObjectId(postId as any) },
+
+    console.log("update good to go for this one");
+    const updatePost = await models.Post.findOneAndUpdate(
+      { postId: postId },
       {
         coverImage,
         price,
@@ -44,8 +47,12 @@ export async function CreatePost(req: Request, res: Response) {
         new: true,
       }
     );
+    if (!updatePost) {
+      console.log("could not find this item");
+    }
     return ProcessingSuccess(res, updatePost);
   } catch (e) {
+    console.log(e);
     return ProcessingError(res);
   }
 }

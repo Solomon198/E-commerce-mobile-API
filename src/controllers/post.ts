@@ -9,26 +9,42 @@ require("dotenv/config");
 // the middleware handles lot of stuffs that should have been done here
 export async function CreatePost(req: Request, res: Response) {
   try {
-    const { userId, title, description, category, coverImage, price } =
+    const { userId, title, description, category, coverImage, price, postId } =
       req.body as PostProps;
-    const postId = new Types.ObjectId();
-    const newPost = new models.Post({
-      title,
-      description,
-      category,
-      coverImage,
-      price: parseFloat(price as any), // eslint-disable-line
-      userId,
-      postId,
-      date: new Date(),
-    });
-    newPost._id = postId; // eslint-disable-line;
+    if (!postId) {
+      const newPostId = new Types.ObjectId();
+      const newPost = new models.Post({
+        title,
+        description,
+        category,
+        coverImage,
+        price: parseFloat(price as any), // eslint-disable-line
+        userId,
+        newPostId,
+        date: new Date(),
+      });
+      newPost._id = newPostId; // eslint-disable-line;
 
-    await newPost.save({ validateBeforeSave: false });
-    const post = await models.Post.findOne({ postId }).populate(
-      "category userId"
+      await newPost.save({ validateBeforeSave: false });
+      const post = await models.Post.findOne({ postId: newPostId }).populate(
+        "category userId"
+      );
+      return ProcessingSuccess(res, post);
+    }
+    const updatePost = await models.Post.updateOne(
+      { postId: new Types.ObjectId(postId) },
+      {
+        coverImage,
+        price,
+        category,
+        title,
+        description,
+      },
+      {
+        new: true,
+      }
     );
-    return ProcessingSuccess(res, post);
+    return ProcessingSuccess(res, updatePost);
   } catch (e) {
     return ProcessingError(res);
   }

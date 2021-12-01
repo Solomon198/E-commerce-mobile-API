@@ -9,6 +9,7 @@ const requestBodySchema = joi.object({
   price: joi.string().required(),
   category: joi.string().required(),
   userId: joi.string().required(),
+  postId: joi.string().allow(""),
 });
 
 export default function ValidatePostMiddleware(

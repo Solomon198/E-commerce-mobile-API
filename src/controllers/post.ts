@@ -32,7 +32,7 @@ export async function CreatePost(req: Request, res: Response) {
       return ProcessingSuccess(res, post);
     }
     const updatePost = await models.Post.updateOne(
-      { postId: Types.ObjectId(postId) },
+      { postId: Types.ObjectId(postId as any) },
       {
         coverImage,
         price,

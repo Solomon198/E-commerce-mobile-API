@@ -12,7 +12,8 @@ export async function CreatePost(req: Request, res: Response) {
     const { userId, title, description, category, coverImage, price, postId } =
       req.body as PostProps;
     console.log(postId);
-    if (!postId) {
+    // @ts-ignore
+    if (postId === undefined || postId === "") {
       const newPostId = new Types.ObjectId();
       const newPost = new models.Post({
         title,

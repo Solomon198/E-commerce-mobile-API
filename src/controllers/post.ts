@@ -22,7 +22,7 @@ export async function CreatePost(req: Request, res: Response) {
         coverImage,
         price: parseFloat(price as any), // eslint-disable-line
         userId,
-        newPostId,
+        postId: newPostId,
         date: new Date(),
       });
       newPost._id = newPostId; // eslint-disable-line;

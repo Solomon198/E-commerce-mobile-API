@@ -1,6 +1,5 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
-import * as firebaseAdmin from "firebase-admin";
 // import * as functions from "firebase-functions";
 import * as cors from "cors";
 import routes from "./routes";
@@ -9,12 +8,7 @@ import constants from "./constants/index";
 /* eslint-disable*/
 require("dotenv/config");
 require("./utills/connection");
-const certJSON = require("../serviceAccountKey.json");
 
-/* eslint-enable */
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert(certJSON),
-});
 const {
   LOGIN_BASE,
   SIGNUP_BASE,
